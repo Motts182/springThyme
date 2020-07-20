@@ -1,0 +1,27 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<form th:action="@{/crearCandidato}" th:object="${candidato}" method="POST">
+    <span th:if="${candidato.id !=null}"><input type="text" th:field="${candidato.id}" readonly></span>
+    <input type="text" placeholder="Nombre" th:field="${candidato.nombreCandidato}"/>
+    <input type="Submit" th:value="${candidato.id != null} ? 'Guardar Candidato' : 'Crear Candidato'"/>
+</form>
+<table border="1">
+    <thead>
+    <tr>Id</tr>
+    <tr>Nombre</tr>
+    <tr>Editar</tr>
+    <tr>Eliminar</tr>
+    </thead>
+    <tbody>
+    <tr th:each="candidato : ${candidatos}">
+        <td th:text="${candidato.id}"></td>
+        <td th:text="${candidato.nombreCandidato}"></td>
+        <td><a th:href="@{'/editarCandidato/'+ ${candidato.id}}">Editar  |</a><a th:href="@{'/eliminarCandidato/'+ ${candidato.id}}">  Eliminar</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
