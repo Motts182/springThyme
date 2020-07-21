@@ -15,17 +15,30 @@ public class DataInit {
 
     @PostConstruct
     public void init(){
+
         Candidato candidato = Candidato.builder()
-                .nombreCandidato("Matias Diaz").build();
+                .nombreCandidato("Matias ")
+                .apellidoandidato("Diaz")
+                .fechaNacCandidato("2020-07-12")
+                .build();
 
         Candidato candidato1 = Candidato.builder()
-                .nombreCandidato("Leandro Diaz").build();
+                .nombreCandidato("Canela ")
+                .apellidoandidato("Nuñez")
+                .fechaNacCandidato("1989-02-06")
+                .build();
 
         Candidato candidato2 = Candidato.builder()
-                .nombreCandidato("Facundo Murcia").build();
+                .nombreCandidato("Cubo ")
+                .apellidoandidato("Diaz")
+                .fechaNacCandidato("1989-08-10")
+                .build();
 
         Candidato candidato3 = Candidato.builder()
-                .nombreCandidato("Cubo Diaz").build();
+                .nombreCandidato("Pepe ")
+                .apellidoandidato("Hon")
+                .fechaNacCandidato("1910-01-21")
+                .build();
 
         candidatoRepository.save(candidato);
         candidatoRepository.save(candidato1);

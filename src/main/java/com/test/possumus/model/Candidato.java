@@ -1,10 +1,8 @@
 package com.test.possumus.model;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,4 +17,21 @@ public class Candidato {
     private Long id;
 
     private String nombreCandidato;
+    private String apellidoandidato;
+    private String fechaNacCandidato;
+
+
+//    Skill
+    @ManyToMany
+    @JoinTable(name = "candidato_skills"
+        ,joinColumns = @JoinColumn(name = "candidato_id")
+        ,inverseJoinColumns = @JoinColumn(name = "skill_id")
+    )
+    private Set<Skill> skills;
+
+    //Contacto
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="contacto_id", unique = true)
+    private Contacto contacto;
+
 }
