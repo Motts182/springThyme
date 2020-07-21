@@ -2,6 +2,7 @@ package com.test.possumus.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -21,17 +22,16 @@ public class Candidato {
     private String fechaNacCandidato;
 
 
-//    Skill
+    //Skill
     @ManyToMany
     @JoinTable(name = "candidato_skills"
         ,joinColumns = @JoinColumn(name = "candidato_id")
         ,inverseJoinColumns = @JoinColumn(name = "skill_id")
     )
-    private Set<Skill> skills;
+    private List<Skill> skills;
 
     //Contacto
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="contacto_id", unique = true)
     private Contacto contacto;
-
 }

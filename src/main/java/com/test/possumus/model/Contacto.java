@@ -18,4 +18,8 @@ public class Contacto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String telefono;
+
+    private String email;
 }

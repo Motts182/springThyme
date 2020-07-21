@@ -2,6 +2,7 @@ package com.test.possumus.controller;
 
 import com.test.possumus.model.Candidato;
 import com.test.possumus.repository.CandidatoRepository;
+import com.test.possumus.repository.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +19,15 @@ public class CandidatoController {
     @Autowired
     private CandidatoRepository candidatoRepository;
 
+    @Autowired
+    private SkillRepository skillRepository;
+
     @GetMapping
     public String index(Model model, Candidato candidato) {
 
         model.addAttribute("candidato", new Candidato());
         model.addAttribute("candidatos", candidatoRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
         return "index";
     }
 
@@ -32,6 +37,7 @@ public class CandidatoController {
         candidatoRepository.save(candidato);
         model.addAttribute("candidato", new Candidato());
         model.addAttribute("candidatos", candidatoRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
         return "index";
     }
 
@@ -41,6 +47,7 @@ public class CandidatoController {
         Candidato candidatoParaEditar = candidatoRepository.findById(id).get();
         model.addAttribute("candidato", candidatoParaEditar);
         model.addAttribute("candidatos", candidatoRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
         return "index";
     }
 
@@ -51,6 +58,7 @@ public class CandidatoController {
         candidatoRepository.delete(candidatoParaEliminar);
         model.addAttribute("candidato", new Candidato());
         model.addAttribute("candidatos", candidatoRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
         return "index";
     }
 }

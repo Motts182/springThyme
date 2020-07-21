@@ -41,7 +41,13 @@
             <label th:text="'Fecha de nacimiento'"></label><br/>
             <input type="date" th:field="${candidato.fechaNacCandidato}" />
             </div><br/>
-            
+
+            <label th:text="Rol"></label><br/>
+            <select th:field="${candidato.skills}" multiple="multiple">
+                <option th:each="skill :${skills}" th:value="${skill.id}" th:text="${skill.descripcion}">
+                </option>
+            </select><br/>
+
             <input type="Submit" th:value="${candidato.id != null} ? 'Guardar Candidato' : 'Crear Candidato'" />
     </form>
 
@@ -50,6 +56,8 @@
             <tr>Id</tr>
             <tr>Nombre</tr>
             <tr>Apellido</tr>
+            <tr>Fecha de nacimiento</tr>
+            <tr>Skills</tr>
             <tr>Editar</tr>
             <tr>Eliminar</tr>
         </thead>
@@ -59,8 +67,27 @@
                 <td th:text="${candidato.nombreCandidato}"></td>
                 <td th:text="${candidato.apellidoandidato}"></td>
                 <td th:text="${candidato.fechaNacCandidato}"></td>
+                <td>
+					<th:block th:each="rol,iter: ${candidato.skills}">
+    					<label th:text="${rol.descripcion}"></label>
+   						<th:block th:if="${!iter.last}">, </th:block>
+  					</th:block>
+				</td>
                 <td><a th:href="@{'/editarCandidato/'+ ${candidato.id}}">Editar |</a><a
                         th:href="@{'/eliminarCandidato/'+ ${candidato.id}}"> Eliminar</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+     <table border="1">
+        <thead>
+            <tr>Id</tr>
+            <tr>skill</tr>
+        </thead>
+        <tbody>
+            <tr th:each="skills : ${skills}">
+                <td th:text="${skills.id}"></td>
+                <td th:text="${skills.descripcion}"></td>
             </tr>
         </tbody>
     </table>
