@@ -12,6 +12,8 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Builder
+@ToString
+@EqualsAndHashCode
 @Entity
 public class Skill {
 

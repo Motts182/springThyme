@@ -5,11 +5,13 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Builder
+@ToString
+@EqualsAndHashCode
 @Entity
 public class Candidato {
 
@@ -34,4 +36,5 @@ public class Candidato {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="contacto_id", unique = true)
     private Contacto contacto;
+
 }
