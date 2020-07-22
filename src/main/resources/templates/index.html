@@ -29,62 +29,65 @@
 </head>
 
 <body>
-    <span>Informacion</span>
-    <form th:action="@{/crearCandidato}" th:object="${candidato}" method="POST" id="userForm">
-        <div style="border: 1px solid black; padding:20px;" />
+    <div class="container">
+        <span>Informacion</span>
+        <form th:action="@{/crearCandidato}" th:object="${candidato}" method="POST" id="userForm">
+            <div style="border: 1px solid black; padding:20px;" />
 
-        <span th:if="${candidato.id !=null}"><input type="text" th:field="${candidato.id}" readonly></span>
-        <label th:text="Nombre"></label><br/>
-        <input type="text" placeholder="Nombre" th:field="${candidato.nombreCandidato}" />
+            <span th:if="${candidato.id !=null}"><input type="text" th:field="${candidato.id}" readonly></span>
+            <label th:text="Nombre"></label><br/>
+            <input type="text" placeholder="Nombre" th:field="${candidato.nombreCandidato}" />
 
-        <label th:text="Apellido"></label><br/>
-        <input type="text" placeholder="Apellido" th:field="${candidato.apellidoandidato}" />
+            <label th:text="Apellido"></label><br/>
+            <input type="text" placeholder="Apellido" th:field="${candidato.apellidoandidato}" />
 
-        <label th:text="'Fecha de nacimiento'"></label><br/>
-        <input type="date" th:field="${candidato.fechaNacCandidato}" />
-        </div><br/>
+            <label th:text="'Fecha de nacimiento'"></label><br/>
+            <input type="date" th:field="${candidato.fechaNacCandidato}" />
+    </div><br/>
 
-        <label th:text="Skills"></label><br/>
-        <select th:field="${candidato.skills}" multiple="multiple">
+    <label th:text="Skills"></label><br/>
+    <select th:field="${candidato.skills}" multiple="multiple">
                 <option th:each="skillcand :${skills}" th:value="${skillcand.id}" th:text="${skillcand.descripcion}">
                 </option>
             </select><br/>
 
-        <span>Contacto</span>
-        <div style="border: 1px solid black; padding:20px;">
+    <span>Contacto</span>
+    <div style="border: 1px solid black; padding:20px;">
 
-            <label th:text="'Telefono'"></label><br/>
-            <input type="text" th:field="${candidato.contacto.telefono}" />
+        <label th:text="'Telefono'"></label><br/>
+        <input type="text" th:field="${candidato.contacto.telefono}" />
 
-            <label th:text="'Email'"></label><br/>
-            <input type="text" th:field="${candidato.contacto.email}" />
-            <input type="file" th:field="${candidato.historialLaboral.cv}" />
-        </div><br/>
+        <label th:text="'Email'"></label><br/>
+        <input type="text" th:field="${candidato.contacto.email}" />
+        <input type="file" th:field="${candidato.historialLaboral.cv}" />
+    </div><br/>
 
-        </div>
+    </div>
 
-        <input class="btn btn-secondary" type="Submit" th:value="${candidato.id != null} ? 'Guardar Candidato' : 'Crear Candidato'" />
+    <input class="btn btn-secondary" type="Submit" th:value="${candidato.id != null} ? 'Guardar Candidato' : 'Crear Candidato'" />
     </form>
 
-    <table border="1">
+    <table class="table table-striped table-dark">
         <thead>
-            <tr>Id</tr>
-            <tr>Nombre</tr>
-            <tr>Apellido</tr>
-            <tr>Fecha de nacimiento</tr>
-            <tr>Skills</tr>
-            <tr>Numero Telefono</tr>
-            <tr>Email</tr>
-            <tr>Editar - Eliminar</tr>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Fecha de nacimiento</th>
+                <th scope="col">Numero Telefono</th>
+                <th scope="col">Email</th>
+                <th scope="col">Skills</th>
+                <th scope="col">Editar - Eliminar</th>
+            </tr>
         </thead>
         <tbody>
-            <tr th:each="candidato : ${candidatos}">
-                <td th:text="${candidato.id}"></td>
-                <td th:text="${candidato.nombreCandidato}"></td>
-                <td th:text="${candidato.apellidoandidato}"></td>
-                <td th:text="${candidato.fechaNacCandidato}"></td>
-                <td th:text="${candidato.contacto.telefono}"></td>
-                <td th:text="${candidato.contacto.email}"></td>
+            <tr scope="row" th:each="candidato : ${candidatos}">
+                <th th:text="${candidato.id}"></th>
+                <th th:text="${candidato.nombreCandidato}"></th>
+                <th th:text="${candidato.apellidoandidato}"></th>
+                <th th:text="${candidato.fechaNacCandidato}"></th>
+                <th th:text="${candidato.contacto.telefono}"></th>
+                <th th:text="${candidato.contacto.email}"></th>
                 <td>
                     <th:block th:each="rol,iter: ${candidato.skills}">
                         <label th:text="${rol.descripcion}"></label>
@@ -95,7 +98,6 @@
             </tr>
         </tbody>
     </table>
-
     <table border="1">
         <thead>
             <tr>Id</tr>
@@ -121,6 +123,7 @@
             </tr>
         </tbody>
     </table>
+    </div>
 </body>
 <footer>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
