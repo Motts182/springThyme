@@ -2,24 +2,26 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>CRUD Possumus</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <style type="text/css">
         body,
         html {
             width: 250px;
         }
-
+        
         input:not([type="checkbox"]):not([type="radio"]),
         select {
             width: 160px;
         }
-
+        
         input:not([type="radio"]),
         select {
             margin-bottom: 15px;
         }
-
+        
         .button {
             width: 200px !important;
         }
@@ -29,21 +31,21 @@
 <body>
     <span>Informacion</span>
     <form th:action="@{/crearCandidato}" th:object="${candidato}" method="POST" id="userForm">
-        <div style="border: 1px solid black; padding:20px;"/>
+        <div style="border: 1px solid black; padding:20px;" />
 
-            <span th:if="${candidato.id !=null}"><input type="text" th:field="${candidato.id}" readonly></span>
-            <label th:text="Nombre"></label><br/>
-            <input type="text" placeholder="Nombre" th:field="${candidato.nombreCandidato}" />
+        <span th:if="${candidato.id !=null}"><input type="text" th:field="${candidato.id}" readonly></span>
+        <label th:text="Nombre"></label><br/>
+        <input type="text" placeholder="Nombre" th:field="${candidato.nombreCandidato}" />
 
-            <label th:text="Apellido"></label><br/>
-            <input type="text" placeholder="Apellido" th:field="${candidato.apellidoandidato}" />
+        <label th:text="Apellido"></label><br/>
+        <input type="text" placeholder="Apellido" th:field="${candidato.apellidoandidato}" />
 
-            <label th:text="'Fecha de nacimiento'"></label><br/>
-            <input type="date" th:field="${candidato.fechaNacCandidato}" />
-            </div><br/>
+        <label th:text="'Fecha de nacimiento'"></label><br/>
+        <input type="date" th:field="${candidato.fechaNacCandidato}" />
+        </div><br/>
 
-            <label th:text="Skills"></label><br/>
-            <select th:field="${candidato.skills}" multiple="multiple">
+        <label th:text="Skills"></label><br/>
+        <select th:field="${candidato.skills}" multiple="multiple">
                 <option th:each="skillcand :${skills}" th:value="${skillcand.id}" th:text="${skillcand.descripcion}">
                 </option>
             </select><br/>
@@ -52,15 +54,16 @@
         <div style="border: 1px solid black; padding:20px;">
 
             <label th:text="'Telefono'"></label><br/>
-            <input type="text" th:field="${candidato.contacto.telefono}"/>
+            <input type="text" th:field="${candidato.contacto.telefono}" />
 
             <label th:text="'Email'"></label><br/>
-            <input type="text" th:field="${candidato.contacto.email}"/>
+            <input type="text" th:field="${candidato.contacto.email}" />
+            <input type="file" th:field="${candidato.historialLaboral.cv}" />
         </div><br/>
 
         </div>
 
-            <input type="Submit" th:value="${candidato.id != null} ? 'Guardar Candidato' : 'Crear Candidato'" />
+        <input class="btn btn-secondary" type="Submit" th:value="${candidato.id != null} ? 'Guardar Candidato' : 'Crear Candidato'" />
     </form>
 
     <table border="1">
@@ -83,18 +86,17 @@
                 <td th:text="${candidato.contacto.telefono}"></td>
                 <td th:text="${candidato.contacto.email}"></td>
                 <td>
-					<th:block th:each="rol,iter: ${candidato.skills}">
-    					<label th:text="${rol.descripcion}"></label>
-   						<th:block th:if="${!iter.last}">, </th:block>
-  					</th:block>
-				</td>
-                <td><a th:href="@{'/editarCandidato/'+ ${candidato.id}}">Editar |</a><a
-                        th:href="@{'/eliminarCandidato/'+ ${candidato.id}}"> Eliminar</a></td>
+                    <th:block th:each="rol,iter: ${candidato.skills}">
+                        <label th:text="${rol.descripcion}"></label>
+                        <th:block th:if="${!iter.last}">, </th:block>
+                    </th:block>
+                </td>
+                <td><a th:href="@{'/editarCandidato/'+ ${candidato.id}}">Editar |</a><a th:href="@{'/eliminarCandidato/'+ ${candidato.id}}"> Eliminar</a></td>
             </tr>
         </tbody>
     </table>
 
-     <table border="1">
+    <table border="1">
         <thead>
             <tr>Id</tr>
             <tr>skill</tr>
@@ -109,16 +111,20 @@
 
     <table border="1">
         <thead>
-        <tr>Id</tr>
-        <tr>skill</tr>
+            <tr>Id</tr>
+            <tr>skill</tr>
         </thead>
         <tbody>
-        <tr th:each="skills : ${candidato.skills}">
-            <td th:text="${skills.id}"></td>
-            <td th:text="${skills.descripcion}"></td>
-        </tr>
+            <tr th:each="skills : ${candidato.skills}">
+                <td th:text="${skills.id}"></td>
+                <td th:text="${skills.descripcion}"></td>
+            </tr>
         </tbody>
     </table>
 </body>
+<footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+</footer>
 
 </html>

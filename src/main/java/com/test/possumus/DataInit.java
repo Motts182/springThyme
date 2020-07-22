@@ -2,16 +2,16 @@ package com.test.possumus;
 
 import com.test.possumus.model.Candidato;
 import com.test.possumus.model.Contacto;
+import com.test.possumus.model.HistorialLaboral;
 import com.test.possumus.model.Skill;
 import com.test.possumus.repository.CandidatoRepository;
 import com.test.possumus.repository.ContactoRepository;
+import com.test.possumus.repository.HistorialRepository;
 import com.test.possumus.repository.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,15 +27,11 @@ public class DataInit {
     @Autowired
     private ContactoRepository contactoRepository;
 
+    @Autowired
+    private HistorialRepository historialRepository;
+
     @PostConstruct
     public void init(){
-
-//        Contacto contacto1 = Contacto.builder()
-//                .email("mnd.matias.diaz@gmail.com")
-//                .telefono("154123122")
-//                .build();
-//
-//        contactoRepository.save(contacto1);
 
         Skill skill1 = Skill.builder()
                 .descripcion("Java").build();
@@ -57,7 +53,11 @@ public class DataInit {
                 .apellidoandidato("Diaz")
                 .fechaNacCandidato("2020-07-12")
                 .skills(skillsList)
-                .contacto(Contacto.builder().build())
+                .contacto(Contacto.builder()
+                        .telefono("42460201")
+                        .email("madas.s@gmail.comm")
+                        .build())
+                .historialLaboral(HistorialLaboral.builder().build())
                 .build();
 
         Candidato candidato1 = Candidato.builder()
@@ -65,7 +65,11 @@ public class DataInit {
                 .apellidoandidato("Nuñez")
                 .fechaNacCandidato("1989-02-06")
                 .skills(Arrays.asList(skill1))
-                .contacto(Contacto.builder().build())
+                .contacto(Contacto.builder()
+                        .telefono("4246001662")
+                        .email("cacaas.s@gmail.comm")
+                        .build())
+                .historialLaboral(HistorialLaboral.builder().build())
                 .build();
 
         Candidato candidato2 = Candidato.builder()
@@ -73,7 +77,11 @@ public class DataInit {
                 .apellidoandidato("Diaz")
                 .fechaNacCandidato("1989-08-10")
                 .skills(skillsList)
-                .contacto(new Contacto())
+                .contacto(Contacto.builder()
+                        .telefono("422244444")
+                        .email("irri.aaas@gmail.comm")
+                        .build())
+                .historialLaboral(HistorialLaboral.builder().build())
                 .build();
 
         Candidato candidato3 = Candidato.builder()
@@ -81,7 +89,11 @@ public class DataInit {
                 .apellidoandidato("Hon")
                 .fechaNacCandidato("1910-01-21")
                 .skills(Arrays.asList(skill3))
-                .contacto(Contacto.builder().build())
+                .contacto(Contacto.builder()
+                        .telefono("121212")
+                        .email("madas.mddd.s@bbt.comm")
+                        .build())
+                .historialLaboral(HistorialLaboral.builder().build())
                 .build();
 
         candidatoRepository.save(candidato);

@@ -23,7 +23,6 @@ public class Candidato {
     private String apellidoandidato;
     private String fechaNacCandidato;
 
-
     //Skill
     @ManyToMany
     @JoinTable(name = "candidato_skills"
@@ -37,4 +36,9 @@ public class Candidato {
     @JoinColumn(name="contacto_id", unique = true)
     private Contacto contacto;
 
+
+    //
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="historial_id", unique = true)
+    private HistorialLaboral historialLaboral;
 }
