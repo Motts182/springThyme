@@ -1,13 +1,7 @@
 package com.test.possumus;
 
-import com.test.possumus.model.Candidato;
-import com.test.possumus.model.Contacto;
-import com.test.possumus.model.HistorialLaboral;
-import com.test.possumus.model.Skill;
-import com.test.possumus.repository.CandidatoRepository;
-import com.test.possumus.repository.ContactoRepository;
-import com.test.possumus.repository.HistorialRepository;
-import com.test.possumus.repository.SkillRepository;
+import com.test.possumus.model.*;
+import com.test.possumus.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +23,9 @@ public class DataInit {
 
     @Autowired
     private HistorialRepository historialRepository;
+
+    @Autowired
+    private EmpleoRepository empleoRepository;
 
     @PostConstruct
     public void init(){
@@ -57,8 +54,10 @@ public class DataInit {
                         .telefono("42460201")
                         .email("madas.s@gmail.comm")
                         .build())
+                .empleos(Arrays.asList(Empleo.builder().nombreEmpresa("GlobalLogic").build()))
                 .historialLaboral(HistorialLaboral.builder().build())
                 .build();
+
 
         Candidato candidato1 = Candidato.builder()
                 .nombreCandidato("Canela ")
@@ -82,6 +81,7 @@ public class DataInit {
                         .email("irri.aaas@gmail.comm")
                         .build())
                 .historialLaboral(HistorialLaboral.builder().build())
+                .empleos(Arrays.asList(Empleo.builder().nombreEmpresa("GLOBANT").build()))
                 .build();
 
         Candidato candidato3 = Candidato.builder()

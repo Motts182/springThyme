@@ -66,6 +66,7 @@ public class CandidatoController {
         model.addAttribute("candidatos", candidatoRepository.findAll());
         model.addAttribute("skills", skillRepository.findAll());
         return "index";
-
     }
+
+
 }

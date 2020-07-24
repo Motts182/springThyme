@@ -31,7 +31,7 @@
 <body>
     <div class="container">
         <span>Informacion</span>
-        <form th:action="@{/crearCandidato}" th:object="${candidato}" method="POST" id="userForm">
+        <form th:action="@{/crearCandidato}" th:object="${candidato}" method="POST" id="userForm" >
             <div style="border: 1px solid black; padding:20px;" />
 
             <span th:if="${candidato.id !=null}"><input type="text" th:field="${candidato.id}" readonly></span>
@@ -47,8 +47,10 @@
 
     <label th:text="Skills"></label><br/>
     <select th:field="${candidato.skills}" multiple="multiple">
-                <option th:each="skillcand :${skills}" th:value="${skillcand.id}" th:text="${skillcand.descripcion}">
-                </option>
+                <option disabled th:each="skillcand :${skills}"
+                        th:value="${skillcand.id}"
+                        th:text="${skillcand.descripcion}">
+                </option >
             </select><br/>
 
     <span>Contacto</span>
@@ -89,8 +91,8 @@
                 <th th:text="${candidato.contacto.telefono}"></th>
                 <th th:text="${candidato.contacto.email}"></th>
                 <td>
-                    <th:block th:each="rol,iter: ${candidato.skills}">
-                        <label th:text="${rol.descripcion}"></label>
+                    <th:block th:each="skill,iter: ${candidato.skills}">
+                        <label th:text="${skill.descripcion}"></label>
                         <th:block th:if="${!iter.last}">, </th:block>
                     </th:block>
                 </td>
@@ -98,6 +100,7 @@
             </tr>
         </tbody>
     </table>
+
     <table border="1">
         <thead>
             <tr>Id</tr>
@@ -111,6 +114,24 @@
         </tbody>
     </table>
 
+    <label >"Empleos del Candidato"</label><br/>
+    <table border="1">
+            <thead>
+                <tr>Id</tr>
+                <tr>Empleo</tr>
+            </thead>
+            <tbody>
+                <tr th:each="empleo : ${candidato.empleos}">
+                    <td th:text="${empleo.id}"></td>
+                    <td th:text="${empleo.nombreEmpresa}"></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </body>
+
+
+<label >"Skills del Candidato"</label><br/>
     <table border="1">
         <thead>
             <tr>Id</tr>
@@ -125,6 +146,7 @@
     </table>
     </div>
 </body>
+
 <footer>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

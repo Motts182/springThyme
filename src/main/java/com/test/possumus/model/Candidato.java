@@ -2,6 +2,8 @@ package com.test.possumus.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -13,10 +15,10 @@ import java.util.Set;
 @ToString
 @EqualsAndHashCode
 @Entity
-public class Candidato {
+public class Candidato implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nombreCandidato;
@@ -31,14 +33,16 @@ public class Candidato {
     )
     private List<Skill> skills;
 
-    //Contacto
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="contacto_id", unique = true)
     private Contacto contacto;
 
-
-    //
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="historial_id", unique = true)
     private HistorialLaboral historialLaboral;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name="empleos_id", unique = true)
+    private List<Empleo> empleos;
+
 }
